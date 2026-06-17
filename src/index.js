@@ -47,6 +47,18 @@ class Game extends React.Component {
     })
   }
 
+  resetGame() {
+    this.setState({
+      history: [
+        {
+          squares: Array(9).fill(null),
+        },
+      ],
+      stepNumber: 0,
+      xIsNext: true,
+    })
+  }
+
   render() {
     const history = this.state.history
     const current = history[this.state.stepNumber]
@@ -59,6 +71,9 @@ class Game extends React.Component {
     }
     return (
       <React.Fragment>
+        <button className="reset-game" onClick={() => this.resetGame()}>
+          Reset Game
+        </button>
         <h1>Tic Tac Toe</h1>
         <section className="game">
           <GameInfo
