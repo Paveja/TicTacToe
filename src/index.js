@@ -17,7 +17,19 @@ class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
+      theme: localStorage.getItem('theme') || 'light',
     }
+  }
+
+  componentDidMount() {
+    document.getElementById('root').setAttribute('data-theme', this.state.theme)
+  }
+
+  toggleTheme() {
+    const newTheme = this.state.theme === 'light' ? 'dark' : 'light'
+    this.setState({ theme: newTheme })
+    localStorage.setItem('theme', newTheme)
+    document.getElementById('root').setAttribute('data-theme', newTheme)
   }
 
   handleClick(i) {
@@ -59,6 +71,14 @@ class Game extends React.Component {
     }
     return (
       <React.Fragment>
+        <button
+          className="theme-toggle"
+          onClick={() => this.toggleTheme()}
+          aria-label={this.state.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          title={this.state.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+        >
+          {this.state.theme === 'light' ? '\u{1F319}' : '\u{2600}\u{FE0F}'}
+        </button>
         <h1>Tic Tac Toe</h1>
         <section className="game">
           <GameInfo

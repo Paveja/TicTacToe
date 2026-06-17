@@ -11,6 +11,14 @@
   --light-grey: rgb(221, 221, 221);
 }
 
+[data-theme="dark"] {
+  --dark-purple: rgb(220, 220, 240);
+  --dark-blue: rgb(80, 160, 220);
+  --light-blue: rgb(30, 30, 46);
+  --white: rgb(45, 45, 65);
+  --light-grey: rgb(55, 55, 75);
+}
+
 *,
 *::before,
 *::after {
@@ -292,4 +300,47 @@ h1 {
     grid-template-columns: 1fr;
     margin-bottom: 3rem;
   }
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10000;
+  background: var(--dark-purple);
+  color: var(--white);
+  border: 2px solid var(--dark-purple);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all ease-in-out 0.3s;
+  font-family: var(--speech-font);
+  line-height: 1;
+}
+
+@media (hover: hover) {
+  .theme-toggle:hover {
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+  }
+}
+
+[data-theme="dark"] .square {
+  color: rgb(220, 220, 240);
+}
+
+[data-theme="dark"] .player-x,
+[data-theme="dark"] .player-o {
+  mix-blend-mode: normal;
+  box-shadow: 20px 20px rgb(20, 20, 35);
+}
+
+[data-theme="dark"] .player-x:after,
+[data-theme="dark"] .player-o:after {
+  box-shadow: 22px 22px rgb(20, 20, 35);
 }
