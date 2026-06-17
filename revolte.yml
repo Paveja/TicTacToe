@@ -1,7 +1,7 @@
 revolte:
   version: '1.0'
-  project: Tic Tac Toe
-  appName: GameFE
+  project: New Project
+  appName: Test application
   config:
     codeReview:
       summarize: true
