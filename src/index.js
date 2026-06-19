@@ -57,7 +57,9 @@ class Game extends React.Component {
   render() {
     const history = this.state.history
     const current = history[this.state.stepNumber]
-    const winner = calculateWinner(current.squares)
+    const result = calculateWinner(current.squares)
+    const winner = result ? result.winner : null
+    const winningIndices = result ? result.indices : []
     let status
     if (winner) {
       status = 'Winner: ' + winner
@@ -85,6 +87,7 @@ class Game extends React.Component {
               squares={current.squares}
               onClick={(i) => this.handleClick(i)}
               jumpTo={(i) => this.jumpTo(i)}
+              winningIndices={winningIndices}
             />
           </section>
         </main>

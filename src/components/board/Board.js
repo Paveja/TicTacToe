@@ -1,8 +1,9 @@
 import Square from '../square/Square'
 
-const Board = ({ squares, onClick, jumpTo }) => {
+const Board = ({ squares, onClick, jumpTo, winningIndices }) => {
   const renderSquare = (i) => {
-    return <Square value={squares[i]} onClick={() => onClick(i)} />
+    const isWinning = winningIndices.includes(i)
+    return <Square value={squares[i]} onClick={() => onClick(i)} isWinning={isWinning} />
   }
   return (
     <section className="game-section">
