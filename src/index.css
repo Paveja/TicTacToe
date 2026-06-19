@@ -293,3 +293,66 @@ h1 {
     margin-bottom: 3rem;
   }
 }
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--dark-purple);
+  background-color: var(--white);
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Dark Mode Styles */
+main.dark-mode {
+  background-color: var(--dark-purple);
+}
+
+main.dark-mode h1 {
+  color: var(--light-blue);
+}
+
+main.dark-mode .square {
+  background-color: var(--dark-blue);
+  border-color: var(--light-blue);
+  color: var(--white);
+}
+
+main.dark-mode .player-x,
+main.dark-mode .player-o {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  box-shadow: 20px 20px var(--light-blue);
+}
+
+main.dark-mode .player-x:after,
+main.dark-mode .player-o:after {
+  background-color: var(--dark-blue);
+  box-shadow: 22px 22px var(--light-blue);
+}
+
+main.dark-mode .theme-toggle {
+  background-color: var(--dark-blue);
+  border-color: var(--light-blue);
+  color: var(--white);
+}

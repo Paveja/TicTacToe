@@ -17,6 +17,7 @@ class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
+      darkMode: false,
     }
   }
 
@@ -47,6 +48,12 @@ class Game extends React.Component {
     })
   }
 
+  toggleDarkMode() {
+    this.setState({
+      darkMode: !this.state.darkMode,
+    })
+  }
+
   render() {
     const history = this.state.history
     const current = history[this.state.stepNumber]
@@ -59,19 +66,28 @@ class Game extends React.Component {
     }
     return (
       <React.Fragment>
-        <h1>Tic Tac Toe</h1>
-        <section className="game">
-          <GameInfo
-            status={status}
-            winner={winner}
-            xIsNext={this.state.xIsNext}
-          />
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-            jumpTo={(i) => this.jumpTo(i)}
-          />
-        </section>
+        <button
+          className="theme-toggle"
+          onClick={() => this.toggleDarkMode()}
+          title={this.state.darkMode ? 'Light Mode' : 'Dark Mode'}
+        >
+          {this.state.darkMode ? '☀️' : '🌙'}
+        </button>
+        <main className={this.state.darkMode ? 'dark-mode' : ''}>
+          <h1>Tic Tac Toe</h1>
+          <section className="game">
+            <GameInfo
+              status={status}
+              winner={winner}
+              xIsNext={this.state.xIsNext}
+            />
+            <Board
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+              jumpTo={(i) => this.jumpTo(i)}
+            />
+          </section>
+        </main>
       </React.Fragment>
     )
   }
