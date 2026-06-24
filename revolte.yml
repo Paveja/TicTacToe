@@ -1,7 +1,7 @@
 revolte:
   version: '1.0'
   project: New Project
-  appName: Test application
+  appName: New application
   config:
     codeReview:
       summarize: true
@@ -13,21 +13,6 @@ revolte:
     developerWorkflow:
       enabled: true
   env:
-    staging:
-      codeReview: true
-      testSuite: true
-      branch: main
-      services:
-        rid_1:
-          type: WEB_APP
-          name: web-app_service
-          entryPoint: index.js
-          properties:
-            indexPage: index.html
-            errorPage: error.html
-            enableCdn: false
-            variables:
-              BASE_URL: /api/v1
     qa:
       codeReview: true
       testSuite: true
@@ -35,7 +20,22 @@ revolte:
       services:
         rid_1:
           type: WEB_APP
-          name: web-app_service
+          name: web_app_service
+          entryPoint: index.js
+          properties:
+            indexPage: index.html
+            errorPage: error.html
+            enableCdn: false
+            variables:
+              BASE_URL: /api/v1
+    staging:
+      codeReview: true
+      testSuite: true
+      branch: main
+      services:
+        rid_1:
+          type: WEB_APP
+          name: web_app_service
           entryPoint: index.js
           properties:
             indexPage: index.html
@@ -50,7 +50,7 @@ revolte:
       services:
         rid_1:
           type: WEB_APP
-          name: web-app_service
+          name: web_app_service
           entryPoint: index.js
           properties:
             indexPage: index.html
@@ -64,7 +64,7 @@ revolte:
       services:
         rid_1:
           type: WEB_APP
-          name: web-app_service
+          name: web_app_service
           entryPoint: index.js
           properties:
             indexPage: index.html
