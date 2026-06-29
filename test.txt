@@ -1,1 +1,15 @@
 This is a text file
+
+TicTacToe Application
+=====================
+
+This is a Tic Tac Toe game application that brings the classic strategy game to life. Players can compete against each other or against an AI opponent on a 3x3 grid.
+
+Key Features:
+- Interactive 3x3 game board
+- Two-player gameplay mode
+- Win detection and game state management
+- Clean and user-friendly interface
+- Real-time game updates
+
+The objective is simple: be the first to get three of your marks (X or O) in a row—horizontally, vertically, or diagonally. It's a timeless game of strategy and quick thinking.
