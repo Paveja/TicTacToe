@@ -377,3 +377,61 @@ main.dark-mode .theme-toggle {
   border-color: var(--light-blue);
   color: var(--white);
 }
+
+/* Game Counter Styles */
+.game-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 2rem;
+  background-color: var(--white);
+  border: 2px solid var(--dark-purple);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.counter-label {
+  font-family: var(--speech-font);
+  font-size: 1.2rem;
+  color: var(--dark-purple);
+  margin: 0;
+  font-weight: 400;
+}
+
+.counter-value {
+  font-family: var(--game-font);
+  font-size: 3rem;
+  color: var(--dark-blue);
+  margin: 0;
+  line-height: 1;
+}
+
+main.dark-mode .game-counter {
+  background-color: var(--dark-blue);
+  border-color: var(--light-blue);
+}
+
+main.dark-mode .counter-label {
+  color: var(--white);
+}
+
+main.dark-mode .counter-value {
+  color: var(--light-blue);
+}
+
+@media screen and (max-width: 900px) {
+  .game-counter {
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .counter-label {
+    font-size: 1rem;
+  }
+
+  .counter-value {
+    font-size: 2.5rem;
+  }
+}
