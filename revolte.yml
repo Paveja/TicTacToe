@@ -1,7 +1,7 @@
 revolte:
   version: '1.0'
-  project: KT proj
-  appName: new Kt app
+  project: Kt proj
+  appName: KT FE app
   config:
     codeReview:
       summarize: true
@@ -14,7 +14,7 @@ revolte:
       enabled: true
   env:
     staging:
-      branch: task-tr-2-223
+      branch: main
       codeReview: true
       testSuite: true
       services:
