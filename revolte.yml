@@ -1,7 +1,7 @@
 revolte:
   version: '1.0'
-  project: Kt proj
-  appName: KT FE app
+  project: Test proj
+  appName: New app
   config:
     codeReview:
       summarize: true
