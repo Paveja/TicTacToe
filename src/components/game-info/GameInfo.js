@@ -1,17 +1,29 @@
 import Friends from '../../assets/images/friends.webp'
 
-const GameInfo = ({ status, winner, xIsNext }) => {
+const GameInfo = ({ status, winner, xIsNext, isDraw }) => {
+  let message
+  let messageClass = 'player-x'
+
+  if (winner === 'X') {
+    message = 'Nice! I won!'
+    messageClass = 'player-x'
+  } else if (winner === 'O') {
+    message = 'Wohoo! I made it!'
+    messageClass = 'player-o'
+  } else if (isDraw || status === 'Draw') {
+    message = "It's a draw!"
+    messageClass = 'player-x'
+  } else if (xIsNext) {
+    message = "It's your turn, player X"
+    messageClass = 'player-x'
+  } else {
+    message = 'Now you, player O!'
+    messageClass = 'player-o'
+  }
+
   return (
     <section className="game-information">
-      {xIsNext && !winner ? (
-        <h3 className="player-x">It's your turn, player X</h3>
-      ) : !xIsNext && !winner ? (
-        <h3 className="player-o">Now you, player O! </h3>
-      ) : winner && status === 'Winner: X' ? (
-        <h3 className="player-x">Nice! I won! </h3>
-      ) : (
-        <h3 className="player-o">Wohoo! I made it!</h3>
-      )}
+      <h3 className={messageClass}>{message}</h3>
       <img src={Friends} alt="Player X and Player O" />
     </section>
   )

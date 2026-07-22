@@ -6,6 +6,7 @@ import calculateWinner from './helpers/calculateWinner'
 import Board from './components/board/Board'
 import GameInfo from './components/game-info/GameInfo'
 import GameCounter from './components/game-counter/GameCounter'
+import Moves from './components/moves/Moves'
 
 class Game extends React.Component {
   constructor(props) {
@@ -33,32 +34,53 @@ class Game extends React.Component {
       return
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O'
-    this.setState({
+
+    const result = calculateWinner(squares)
+    const winner = result ? result.winner : null
+    const isBoardFull = squares.every((square) => square !== null)
+    const isGameCompleted = Boolean(winner || isBoardFull)
+
+    const updates = {
       history: history.concat([
         {
           squares: squares,
+          location: i,
         },
       ]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
-    })
+    }
+
+    // Count completed games here (not in render) so time travel cannot double-fire.
+    if (isGameCompleted && !this.state.lastGameWinner) {
+      const newTotal = this.state.totalGamesPlayed + 1
+      updates.totalGamesPlayed = newTotal
+      updates.lastGameWinner = winner || 'draw'
+      localStorage.setItem('totalGamesPlayed', newTotal.toString())
+    }
+
+    this.setState(updates)
   }
 
   jumpTo(step) {
-    console.log(step)
-    this.setState({
+    const current = this.state.history[step]
+    const result = calculateWinner(current.squares)
+    const winner = result ? result.winner : null
+    const isBoardFull = current.squares.every((square) => square !== null)
+    const isGameCompleted = Boolean(winner || isBoardFull)
+
+    // Clear completion when leaving a finished tip so a new branch can count once.
+    // Keep it when already on / returning to the live finished tip.
+    const updates = {
       stepNumber: step,
       xIsNext: step % 2 === 0,
-      lastGameWinner: null,
-    })
-  }
+    }
 
-  incrementGamesPlayed() {
-    const newTotal = this.state.totalGamesPlayed + 1
-    this.setState({
-      totalGamesPlayed: newTotal,
-    })
-    localStorage.setItem('totalGamesPlayed', newTotal.toString())
+    if (!isGameCompleted || step < this.state.history.length - 1) {
+      updates.lastGameWinner = null
+    }
+
+    this.setState(updates)
   }
 
   toggleDarkMode() {
@@ -73,23 +95,19 @@ class Game extends React.Component {
     const result = calculateWinner(current.squares)
     const winner = result ? result.winner : null
     const winningIndices = result ? result.indices : []
-    
-    // Check if game is completed (winner or draw)
-    const isBoardFull = current.squares.every(square => square !== null)
-    const isGameCompleted = winner || isBoardFull
-    
-    // Increment counter only when game transitions from incomplete to complete
-    if (isGameCompleted && this.state.lastGameWinner !== winner && !this.state.lastGameWinner) {
-      this.incrementGamesPlayed()
-      this.setState({ lastGameWinner: winner || 'draw' })
-    }
-    
+    const isBoardFull = current.squares.every((square) => square !== null)
+    const isDraw = !winner && isBoardFull
+    const isViewingHistory = this.state.stepNumber < history.length - 1
+
     let status
     if (winner) {
       status = 'Winner: ' + winner
+    } else if (isDraw) {
+      status = 'Draw'
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
     }
+
     return (
       <React.Fragment>
         <button
@@ -107,13 +125,26 @@ class Game extends React.Component {
               status={status}
               winner={winner}
               xIsNext={this.state.xIsNext}
+              isDraw={isDraw}
             />
-            <Board
-              squares={current.squares}
-              onClick={(i) => this.handleClick(i)}
-              jumpTo={(i) => this.jumpTo(i)}
-              winningIndices={winningIndices}
-            />
+            <section className="game-play">
+              <Board
+                squares={current.squares}
+                onClick={(i) => this.handleClick(i)}
+                jumpTo={(i) => this.jumpTo(i)}
+                winningIndices={winningIndices}
+              />
+              {isViewingHistory && (
+                <p className="history-banner" role="status">
+                  Viewing move #{this.state.stepNumber} — play a move to continue from here
+                </p>
+              )}
+              <Moves
+                history={history}
+                jumpTo={(step) => this.jumpTo(step)}
+                stepNumber={this.state.stepNumber}
+              />
+            </section>
           </section>
         </main>
       </React.Fragment>
