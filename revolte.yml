@@ -1,14 +1,12 @@
 revolte:
   version: '1.0'
   project: sample project
-  appName: new app
+  appName: New app
   workflow:
     developerWorkflow:
       enabled: true
   env:
     staging:
-      codeReview: true
-      testSuite: true
       branch: main
       services:
         rid_1:
@@ -22,8 +20,6 @@ revolte:
             variables:
               BASE_URL: /api/v1
     qa:
-      codeReview: true
-      testSuite: true
       branch: main
       services:
         rid_1:
@@ -37,8 +33,6 @@ revolte:
             variables:
               BASE_URL: /api/v1
     production:
-      codeReview: true
-      testSuite: true
       branch: main
       services:
         rid_1:
@@ -52,8 +46,6 @@ revolte:
             variables:
               BASE_URL: /api/v1
     preview:
-      codeReview: true
-      testSuite: true
       services:
         rid_1:
           type: WEB_APP
