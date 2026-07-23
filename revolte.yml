@@ -1,7 +1,7 @@
 revolte:
   version: '1.0'
-  project: sample project
-  appName: New app
+  project: Test
+  appName: Front-test
   workflow:
     developerWorkflow:
       enabled: true
