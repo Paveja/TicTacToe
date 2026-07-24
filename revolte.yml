@@ -1,6 +1,6 @@
 revolte:
   version: '1.0'
-  project: Test
+  project: New-Proj
   appName: Fe-test
   workflow:
     developerWorkflow:
