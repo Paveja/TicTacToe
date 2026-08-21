@@ -1,7 +1,7 @@
 revolte:
   version: '1.0'
-  project: New-Proj
-  appName: Fe-test
+  project: test
+  appName: sample
   workflow:
     developerWorkflow:
       enabled: true
